@@ -73,6 +73,14 @@
       align-items: center;
       transition: transform 0.3s, background 0.3s;
     }
+    
+    .social-link.website {
+      background: linear-gradient(45deg, #4facfe, #00f2fe, #9b59b6);
+    }
+    
+    .social-link.website:hover {
+      opacity: 0.9;
+    }
 
     .social-link:hover {
       transform: translateY(-3px);
@@ -93,6 +101,22 @@
 
     .social-link.instagram:hover {
       opacity: 0.9;
+    }
+
+    .social-link.github {
+      background: #000000;
+    }
+
+    .social-link.github:hover {
+      background: #333333;
+    }
+    
+    .social-link.tiktok {
+      background: #000000;
+    }
+
+    .social-link.tiktok:hover {
+      background: #333333;
     }
 
     .social-link i {
@@ -171,6 +195,25 @@
     .audio-control input[type="range"] {
       width: 100px;
     }
+
+    .audio-control img {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+      position: relative;
+    }
+
+    .audio-control img::after {
+      content: 'X';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: red;
+      font-weight: bold;
+      font-size: 20px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
   </style>
 </head>
 <body>
@@ -179,7 +222,7 @@
   <div class="audio-control" id="audioControl">
     <button id="toggleMusic"><i class="fas fa-pause"></i></button>
     <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="0.7">
-    <img src="paimon.png" style="width: 30px; height: 30px; margin-right: 10px;">
+    <img src="P3.png" style="width: 30px; height: 30px; margin-right: 10px;">
   </div>
 
   <div class="container">
@@ -192,9 +235,9 @@
     <div class="social-links">
       <a href="#" class="social-link discord"><i class="fab fa-discord"></i> ديسكورد</a>
       <a href="#" class="social-link instagram"><i class="fab fa-instagram"></i> انستغرام</a>
-      <a href="#" class="social-link"><i class="fab fa-tiktok"></i> تيك توك</a>
-      <a href="#" class="social-link"><i class="fab fa-github"></i> جيتهب</a>
-      <a href="#" class="social-link"><i class="fas fa-globe"></i> موقع sg1g1</a>
+      <a href="#" class="social-link tiktok"><i class="fab fa-tiktok"></i> تيك توك</a>
+      <a href="#" class="social-link github"><i class="fab fa-github"></i> جيتهب</a>
+      <a href="#" class="social-link website"><i class="fas fa-globe"></i> موقع sg1g1</a>
     </div>
   </div>
 
@@ -315,22 +358,13 @@
     const paimonButton = document.querySelector('#audioControl img');
     paimonButton.style.cursor = 'pointer';
     paimonButton.addEventListener('click', () => {
-      if (hiddenContainer.classList.contains('show')) {
-        hideImage();
-      } else {
-        // إزالة الصورة وإعادة إنشائها
-        const hiddenImage = document.getElementById('hiddenImage');
-        if (hiddenImage) {
-          hiddenImage.remove();
-        }
-        
-        const newImage = document.createElement('img');
-        newImage.src = 'p2.gif';
-        newImage.alt = 'صورة مخفية';
-        newImage.id = 'hiddenImage';
-        newImage.addEventListener('mouseenter', triggerImageAndSound);
-        newImage.addEventListener('click', triggerImageAndSound);
-        hiddenContainer.appendChild(newImage);
+      const hiddenContainer = document.getElementById('hiddenContainer');
+      const hiddenImage = document.getElementById('hiddenImage');
+      if (hiddenImage) {
+        hiddenImage.remove();
+        hiddenContainer.remove();
+        audioElement.pause();
+        audioElement.currentTime = 0;
       }
     });
     
@@ -364,4 +398,4 @@
   </script>
 
 </body>
-</html>
+ا</html>

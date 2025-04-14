@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="avatar.png" type="image/png">
   <title>روابط التواصل الاجتماعي</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
@@ -62,6 +63,21 @@
       display: grid;
       gap: 15px;
     }
+    
+    .copy-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-left: 10px;
+      transition: background 0.3s;
+    }
+    
+    .copy-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
 
     .social-link {
       background: rgba(255, 255, 255, 0.1);
@@ -80,6 +96,7 @@
     
     .social-link.website:hover {
       opacity: 0.9;
+      background: linear-gradient(45deg, #4facfe, #00f2fe, #9b59b6);
     }
 
     .social-link:hover {
@@ -143,28 +160,7 @@
       }
     }
 
-    /* صورة مخفية تظهر عند التفاعل */
-    .hidden-image-container {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: flex-start;
-      z-index: 2;
-      transition: transform 0.5s ease;
-      transform: translateY(70%);
-    }
 
-    .hidden-image-container.show {
-      transform: translateY(0);
-    }
-
-    .hidden-image-container img {
-      max-width: 200px;
-      height: auto;
-      cursor: pointer;
-    }
   </style>
 
   <style>
@@ -222,7 +218,7 @@
   <div class="audio-control" id="audioControl">
     <button id="toggleMusic"><i class="fas fa-pause"></i></button>
     <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="0.7">
-    <img src="P3.png" style="width: 30px; height: 30px; margin-right: 10px;">
+
   </div>
 
   <div class="container">
@@ -233,20 +229,35 @@
     </div>
 
     <div class="social-links">
-      <a href="#" class="social-link discord"><i class="fab fa-discord"></i> ديسكورد</a>
-      <a href="#" class="social-link instagram"><i class="fab fa-instagram"></i> انستغرام</a>
-      <a href="#" class="social-link tiktok"><i class="fab fa-tiktok"></i> تيك توك</a>
-      <a href="#" class="social-link github"><i class="fab fa-github"></i> جيتهب</a>
-      <a href="#" class="social-link website"><i class="fas fa-globe"></i> موقع sg1g1</a>
+      <div class="social-link-container">
+        <a href="https://discord.gg/h2bJadpF5R" class="social-link discord"><i class="fab fa-discord"></i> ديسكورد</a>
+      </div>
+      <div class="social-link-container">
+        <a href="https://www.instagram.com/sg1g1/" class="social-link instagram"><i class="fab fa-instagram"></i> انستغرام</a>
+      </div>
+      <div class="social-link-container">
+        <a href="https://www.tiktok.com/@sg1g1" class="social-link tiktok"><i class="fab fa-tiktok"></i> تيك توك</a>
+      </div>
+      <div class="social-link-container">
+        <a href="https://github.com/sg1g1" class="social-link github"><i class="fab fa-github"></i> جيتهب</a>
+      </div>
+      <div class="social-link-container">
+        <a href="https://sg1g1.github.io/cd-calculator/" class="social-link website"><i class="fas fa-globe"></i> موقع sg1g1</a>
+      </div>
     </div>
   </div>
 
-  <!-- صورة مخفية -->
-  <div class="hidden-image-container" id="hiddenContainer">
-    <img src="p2.gif" alt="صورة مخفية" id="hiddenImage">
-  </div>
+
 
   <script>
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert('تم نسخ الرابط: ' + text);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    }
+    
     // Snow effect
     document.addEventListener('DOMContentLoaded', function () {
       const snowContainer = document.createElement('div');
@@ -349,53 +360,8 @@
     });
 
     // صورة مخفية + صوت
-    const hiddenContainer = document.getElementById('hiddenContainer');
-    const hiddenImage = document.getElementById('hiddenImage');
-    const audioElement = new Audio('./paimon.mp3');
-    let isActive = false;
-    
-    // زر إلغاء عرض الصورة
-    const paimonButton = document.querySelector('#audioControl img');
-    paimonButton.style.cursor = 'pointer';
-    paimonButton.addEventListener('click', () => {
-      const hiddenContainer = document.getElementById('hiddenContainer');
-      const hiddenImage = document.getElementById('hiddenImage');
-      if (hiddenImage) {
-        hiddenImage.remove();
-        hiddenContainer.remove();
-        audioElement.pause();
-        audioElement.currentTime = 0;
-      }
-    });
-    
 
-
-    function triggerImageAndSound() {
-      if (isActive) return;
-      isActive = true;
-
-      hiddenContainer.classList.add('show');
-      audioElement.play();
-
-      setTimeout(() => {
-        hiddenContainer.classList.remove('show');
-        audioElement.pause();
-        audioElement.currentTime = 0;
-        isActive = false;
-      }, 8000);
-    }
-    
-    function hideImage() {
-      hiddenContainer.classList.remove('show');
-      audioElement.pause();
-      audioElement.currentTime = 0;
-      isActive = false;
-    }
-
-    hiddenImage.addEventListener('mouseenter', triggerImageAndSound);
-    hiddenImage.addEventListener('click', triggerImageAndSound);
-    closeImageButton.addEventListener('click', hideImage);
   </script>
 
 </body>
-ا</html>
+</html>
